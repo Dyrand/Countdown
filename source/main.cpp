@@ -25,11 +25,20 @@
 #include <limits>
 #include <map>
 
+/*
 const std::map<char,uintmax_t> prime_map{
   {'a',2},{'b',3},{'c',5},{'d',7},{'e',11},{'f',13},{'g',17},{'h',19},
   {'i',23},{'j',29},{'k',31},{'l',37},{'m',41},{'n',43},{'o',47},
   {'p',53},{'q',59},{'r',61},{'s',67},{'t',71},{'u',73},{'v',79},
   {'w',83},{'x',89},{'y',97},{'z',101}
+};
+*/
+
+const std::map<char,uintmax_t> prime_map{
+  {'e',2},{'a',3},{'r',5},{'i',7},{'o',11},{'t',13},{'n',17},{'s',19},
+  {'l',23},{'c',29},{'u',31},{'d',37},{'p',41},{'m',43},{'h',47},
+  {'g',53},{'b',59},{'f',61},{'y',67},{'w',71},{'k',73},{'v',79},
+  {'x',83},{'z',89},{'j',97},{'q',101}
 };
 
 const int MAX_PRIME = 101;
@@ -68,6 +77,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Loading words..." << std::endl;
 
     //Calculate values for words
+    std::size_t unloadable = 0;
     while(wordlistFile >> currentWord) {
       std::transform(currentWord.begin(), currentWord.end(), currentWord.begin(), tolower);
       std::size_t product = 1;
@@ -81,6 +91,7 @@ int main(int argc, char* argv[]) {
           potential_overflow = true;
           if(product/c < PRE_MAX_VALUE) {
             //std::cout << currentWord << " is too long" << std::endl;
+            ++unloadable;
             too_long = true;
             break;
           }
@@ -96,6 +107,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << words.size() << " words loaded!" << std::endl;
+    std::cout << unloadable << " words not loaded!" << std::endl;
 
     std::string anagram = argv[1];
 
