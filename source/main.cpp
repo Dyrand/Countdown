@@ -17,18 +17,13 @@
 
 #include <fstream>
 #include <iostream>
-#include <cassert>
 #include <string>
 #include <cstring>
 #include <vector>
-#include <utility>
+#include <cmath>
 #include <algorithm>
-#include <thread>
-#include <future>
 #include <limits>
-#include <cstdint>
 #include <map>
-#include <exception>
 
 const std::map<char,uintmax_t> prime_map{
   {'a',2},{'b',3},{'c',5},{'d',7},{'e',11},{'f',13},{'g',17},{'h',19},
